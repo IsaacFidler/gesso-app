@@ -27,32 +27,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* <header style={{ padding: "1rem", borderBottom: "1px solid #eee" }}>
-          <nav>
-            <a href="/artworks" style={{ marginRight: "1rem" }}>
-              Artworks
-            </a>
-            <a href="/collections" style={{ marginRight: "1rem" }}>
-              Collections
-            </a>
-            <a href="/exhibitions" style={{ marginRight: "1rem" }}>
-              Exhibitions
-            </a>
-            <a href="/explore" style={{ marginRight: "1rem" }}>
-              Explore
-            </a>
-            <a href="/profile/username" style={{ marginRight: "1rem" }}>
-              Profile
-            </a>
-            <a href="/me/settings" style={{ marginRight: "1rem" }}>
-              Settings
-            </a>
-            <a href="/login" style={{ marginRight: "1rem" }}>
-              Login
-            </a>
-            <a href="/signup">Sign Up</a>
-          </nav>
-        </header> */}
         {children}
       </body>
     </html>

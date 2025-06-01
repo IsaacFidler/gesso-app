@@ -134,7 +134,7 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <section className="relative py-12 sm:py-20 lg:py-24">
-          <div className="container px-4">
+          <div className="container max-w-4xl mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-6">
                 Discover the World&apos;s
@@ -159,7 +159,7 @@ export default function HomePage() {
 
         {/* Popular Artworks */}
         <section className="py-12 sm:py-16">
-          <div className="container px-4">
+          <div className="container max-w-6xl mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold">
                 Popular Artworks
@@ -186,7 +186,7 @@ export default function HomePage() {
 
         {/* New Additions */}
         <section className="py-12 sm:py-16 bg-muted/30">
-          <div className="container px-4">
+          <div className="container max-w-6xl mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold">New Additions</h2>
               <Button variant="ghost" className="text-primary">
@@ -219,7 +219,7 @@ export default function HomePage() {
 
         {/* Recommended for You */}
         <section className="py-12 sm:py-16">
-          <div className="container px-4">
+          <div className="container max-w-6xl mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold mb-2">
