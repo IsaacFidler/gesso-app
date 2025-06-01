@@ -235,7 +235,7 @@ function ArtworkCard({ artwork }: { artwork: any }) {
   return (
     <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden">
       <CardContent className="p-0">
-        <Link href={`/artwork/${artwork.id}`}>
+        <Link href={`/artworks/${artwork.id}`}>
           <div className="relative overflow-hidden">
             <Image
               src={artwork.image || "/placeholder.svg"}
