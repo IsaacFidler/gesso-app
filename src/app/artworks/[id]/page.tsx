@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { faker } from "@faker-js/faker";
 
 // Mock data for the artwork
 const artwork = {
@@ -29,7 +30,7 @@ const artwork = {
     bio: "Dutch Post-Impressionist painter",
   },
   year: 1889,
-  image: "/placeholder.svg?height=600&width=800",
+  image: faker.image.urlPicsumPhotos({ width: 800, height: 600 }),
   description:
     "The Starry Night is an oil-on-canvas painting by Dutch Post-Impressionist painter Vincent van Gogh. Painted in June 1889, it depicts the view from the east-facing window of his asylum room at Saint-Rémy-de-Provence, just before sunrise, with the addition of an imaginary village. It has been in the permanent collection of the Museum of Modern Art in New York City since 1941.",
   medium: "Oil on canvas",
@@ -53,7 +54,7 @@ const reviews = [
     id: 1,
     user: {
       name: "Sarah Chen",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: faker.image.urlPicsumPhotos({ width: 40, height: 40 }),
       initials: "SC",
     },
     rating: 5,
@@ -65,7 +66,7 @@ const reviews = [
     id: 2,
     user: {
       name: "Michael Rodriguez",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: faker.image.urlPicsumPhotos({ width: 40, height: 40 }),
       initials: "MR",
     },
     rating: 5,
@@ -77,7 +78,7 @@ const reviews = [
     id: 3,
     user: {
       name: "Emma Thompson",
-      avatar: "/placeholder.svg?height=40&width=40",
+      avatar: faker.image.urlPicsumPhotos({ width: 40, height: 40 }),
       initials: "ET",
     },
     rating: 4,
@@ -93,35 +94,35 @@ const similarArtworks = [
     id: 2,
     title: "Café Terrace at Night",
     artist: "Vincent van Gogh",
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     year: 1888,
   },
   {
     id: 3,
     title: "The Great Wave off Kanagawa",
     artist: "Katsushika Hokusai",
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     year: 1831,
   },
   {
     id: 4,
     title: "Water Lilies",
     artist: "Claude Monet",
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     year: 1919,
   },
   {
     id: 5,
     title: "The Persistence of Memory",
     artist: "Salvador Dalí",
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     year: 1931,
   },
   {
     id: 6,
     title: "Girl with a Pearl Earring",
     artist: "Johannes Vermeer",
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     year: 1665,
   },
 ];
@@ -371,7 +372,7 @@ export default function ArtworkDetailPage() {
               <div className="flex items-center gap-3 mb-3">
                 <Avatar className="h-12 w-12">
                   <AvatarImage
-                    src="/placeholder.svg?height=48&width=48"
+                    src={faker.image.urlPicsumPhotos({ width: 48, height: 48 })}
                     alt={artwork.artist.name}
                   />
                   <AvatarFallback>VG</AvatarFallback>

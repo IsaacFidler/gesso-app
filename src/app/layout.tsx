@@ -27,7 +27,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header style={{ padding: "1rem", borderBottom: "1px solid #eee" }}>
+        {/* <header style={{ padding: "1rem", borderBottom: "1px solid #eee" }}>
           <nav>
             <a href="/artworks" style={{ marginRight: "1rem" }}>
               Artworks
@@ -52,7 +52,7 @@ export default function RootLayout({
             </a>
             <a href="/signup">Sign Up</a>
           </nav>
-        </header>
+        </header> */}
         {children}
       </body>
     </html>

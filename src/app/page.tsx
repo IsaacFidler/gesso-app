@@ -10,124 +10,28 @@ import {
 import { Heart, Home, Search, BookOpen, User, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { faker } from "@faker-js/faker";
 
-// Mock data for artworks
-const popularArtworks = [
-  {
-    id: 1,
-    title: "Starry Night",
-    artist: "Vincent van Gogh",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 2,
-    title: "The Great Wave",
-    artist: "Katsushika Hokusai",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 3,
-    title: "Girl with a Pearl Earring",
-    artist: "Johannes Vermeer",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 4,
-    title: "The Persistence of Memory",
-    artist: "Salvador Dalí",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 5,
-    title: "American Gothic",
-    artist: "Grant Wood",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 6,
-    title: "The Scream",
-    artist: "Edvard Munch",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 7,
-    title: "Guernica",
-    artist: "Pablo Picasso",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 8,
-    title: "The Birth of Venus",
-    artist: "Sandro Botticelli",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 9,
-    title: "Water Lilies",
-    artist: "Claude Monet",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-];
+const popularArtworks = Array.from({ length: 9 }).map(() => ({
+  id: faker.string.uuid(),
+  title: faker.lorem.words(3),
+  artist: faker.person.fullName(),
+  image: faker.image.urlPicsumPhotos({ width: 400, height: 300 }),
+}));
 
-const newAdditions = [
-  {
-    id: 10,
-    title: "Composition VII",
-    artist: "Wassily Kandinsky",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-  {
-    id: 11,
-    title: "The Kiss",
-    artist: "Gustav Klimt",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-  {
-    id: 12,
-    title: "Las Meninas",
-    artist: "Diego Velázquez",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-  {
-    id: 13,
-    title: "The Night Watch",
-    artist: "Rembrandt",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-  {
-    id: 14,
-    title: "A Sunday Afternoon",
-    artist: "Georges Seurat",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-];
+const newAdditions = Array.from({ length: 5 }).map(() => ({
+  id: faker.string.uuid(),
+  title: faker.lorem.words(3),
+  artist: faker.person.fullName(),
+  image: faker.image.urlPicsumPhotos({ width: 300, height: 250 }),
+}));
 
-const recommendedArtworks = [
-  {
-    id: 15,
-    title: "The Arnolfini Portrait",
-    artist: "Jan van Eyck",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-  {
-    id: 16,
-    title: "Liberty Leading the People",
-    artist: "Eugène Delacroix",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-  {
-    id: 17,
-    title: "The Garden of Earthly Delights",
-    artist: "Hieronymus Bosch",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-  {
-    id: 18,
-    title: "The Creation of Adam",
-    artist: "Michelangelo",
-    image: "/placeholder.svg?height=250&width=250",
-  },
-];
+const recommendedArtworks = Array.from({ length: 4 }).map(() => ({
+  id: faker.string.uuid(),
+  title: faker.lorem.words(3),
+  artist: faker.person.fullName(),
+  image: faker.image.urlPicsumPhotos({ width: 250, height: 250 }),
+}));
 
 function ArtworkCard({
   artwork,
