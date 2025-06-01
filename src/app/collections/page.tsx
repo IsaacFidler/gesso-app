@@ -96,7 +96,7 @@ function CollectionCard({ collection }: { collection: Collection }) {
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 h-full">
       <CardContent className="p-0">
-        <Link href={`/collection/${collection.id}`} className="block">
+        <Link href={`/collections/${collection.id}`} className="block">
           {/* Preview Images */}
           <div className="relative p-4 pb-2">
             <div className="flex justify-center items-center gap-2 min-h-[80px]">
@@ -134,7 +134,7 @@ function CollectionCard({ collection }: { collection: Collection }) {
         {/* Collection Info */}
         <div className="p-4 pt-2">
           <div className="flex items-start justify-between mb-2">
-            <Link href={`/collection/${collection.id}`}>
+            <Link href={`/collections/${collection.id}`}>
               <h3 className="font-semibold text-base line-clamp-1 hover:text-primary transition-colors">
                 {collection.title}
               </h3>
@@ -153,13 +153,13 @@ function CollectionCard({ collection }: { collection: Collection }) {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <Link href={`/collection/${collection.id}`}>
+                  <Link href={`/collections/${collection.id}`}>
                     <Eye className="h-4 w-4 mr-2" />
                     View Collection
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href={`/collection/${collection.id}/edit`}>
+                  <Link href={`/collections/${collection.id}/edit`}>
                     <Edit3 className="h-4 w-4 mr-2" />
                     Edit Collection
                   </Link>
@@ -337,57 +337,8 @@ export default function CollectionsPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between px-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">
-                G
-              </span>
-            </div>
-            <span className="font-bold text-xl">Gesso</span>
-          </div>
 
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link
-              href="/"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Home className="h-4 w-4" />
-              <span>Home</span>
-            </Link>
-            <Link
-              href="/explore"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Search className="h-4 w-4" />
-              <span>Explore</span>
-            </Link>
-            <Link
-              href="/collections"
-              className="flex items-center space-x-2 text-primary"
-            >
-              <BookOpen className="h-4 w-4" />
-              <span>Collections</span>
-            </Link>
-            <Link
-              href="/profile"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <User className="h-4 w-4" />
-              <span>Profile</span>
-            </Link>
-          </nav>
-
-          <div className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <main className="container px-4 py-8">
+      <main className="container px-4 py-8 max-w-6xl mx-auto">
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>

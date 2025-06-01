@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +29,94 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container flex h-16 items-center justify-between px-4">
+            <Link href="/">
+              <span className="flex items-center gap-2">
+                <Image
+                  src="/GessoLogo.png"
+                  alt="Gesso Logo"
+                  width={32}
+                  height={32}
+                  className="rounded-lg"
+                  priority
+                />
+                <span className="font-bold text-xl">Gesso</span>
+              </span>
+            </Link>
+            <nav className="hidden md:flex items-center space-x-6">
+              <Link
+                href="/"
+                className="flex items-center space-x-2 text-primary"
+              >
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m4-8v8m5 0a2 2 0 002-2v-5.586a1 1 0 00-.293-.707l-7-7a1 1 0 00-1.414 0l-7 7A1 1 0 003 12.414V18a2 2 0 002 2h3"
+                  />
+                </svg>
+                <span>Home</span>
+              </Link>
+              <Link
+                href="/explore"
+                className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <span>Explore</span>
+              </Link>
+              <Link
+                href="/collections"
+                className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                </svg>
+                <span>Collections</span>
+              </Link>
+              <Link
+                href="/profile"
+                className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M5.5 21a7.5 7.5 0 0113 0" />
+                </svg>
+                <span>Profile</span>
+              </Link>
+            </nav>
+            {/* Mobile Navigation (icon buttons) can be added here if needed */}
+          </div>
+        </header>
         {children}
       </body>
     </html>

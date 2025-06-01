@@ -80,56 +80,6 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between px-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">
-                G
-              </span>
-            </div>
-            <span className="font-bold text-xl">Gesso</span>
-          </div>
-
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/" className="flex items-center space-x-2 text-primary">
-              <Home className="h-4 w-4" />
-              <span>Home</span>
-            </Link>
-            <Link
-              href="/explore"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Search className="h-4 w-4" />
-              <span>Explore</span>
-            </Link>
-            <Link
-              href="/collections"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <BookOpen className="h-4 w-4" />
-              <span>Collections</span>
-            </Link>
-            <Link
-              href="/profile"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <User className="h-4 w-4" />
-              <span>Profile</span>
-            </Link>
-          </nav>
-
-          {/* Mobile Navigation */}
-          <div className="md:hidden flex items-center space-x-4">
-            <Button variant="ghost" size="icon">
-              <Search className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-      </header>
 
       <main>
         {/* Hero Section */}

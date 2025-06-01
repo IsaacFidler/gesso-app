@@ -172,7 +172,7 @@ function ReviewCard({ review }: { review: any }) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function SimilarArtworkCard({ artwork }: { artwork: any }) {
   return (
-    <Link href={`/artwork/${artwork.id}`} className="block group">
+    <Link href={`/artworks/${artwork.id}`} className="block group">
       <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
         <div className="relative">
           <Image
@@ -200,66 +200,6 @@ function SimilarArtworkCard({ artwork }: { artwork: any }) {
 export default function ArtworkDetailPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between px-4">
-          <div className="flex items-center space-x-4">
-            <Link
-              href="/"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Back</span>
-            </Link>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">
-                  G
-                </span>
-              </div>
-              <span className="font-bold text-xl">Gesso</span>
-            </div>
-          </div>
-
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link
-              href="/"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Home className="h-4 w-4" />
-              <span>Home</span>
-            </Link>
-            <Link
-              href="/explore"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Search className="h-4 w-4" />
-              <span>Explore</span>
-            </Link>
-            <Link
-              href="/collections"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <BookOpen className="h-4 w-4" />
-              <span>Collections</span>
-            </Link>
-            <Link
-              href="/profile"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <User className="h-4 w-4" />
-              <span>Profile</span>
-            </Link>
-          </nav>
-
-          <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="icon">
-              <Share2 className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </header>
-
       <main className="container px-4 py-8 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
