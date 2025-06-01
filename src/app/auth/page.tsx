@@ -34,42 +34,43 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { faker } from "@faker-js/faker";
 
 // Mock featured artworks for the hero section
 const featuredArtworks = [
   {
     id: 1,
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     title: "Starry Night",
     artist: "Van Gogh",
   },
   {
     id: 2,
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     title: "The Scream",
     artist: "Munch",
   },
   {
     id: 3,
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     title: "Girl with Pearl",
     artist: "Vermeer",
   },
   {
     id: 4,
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     title: "Great Wave",
     artist: "Hokusai",
   },
   {
     id: 5,
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     title: "Persistence",
     artist: "Dalí",
   },
   {
     id: 6,
-    image: "/placeholder.svg?height=200&width=200",
+    image: faker.image.urlPicsumPhotos({ width: 200, height: 200 }),
     title: "American Gothic",
     artist: "Wood",
   },

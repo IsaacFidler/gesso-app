@@ -280,7 +280,7 @@ function CollectionCard({ collection }: { collection: any }) {
   return (
     <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden">
       <CardContent className="p-0">
-        <Link href={`/collection/${collection.id}`}>
+        <Link href={`/collections/${collection.id}`}>
           <div className="relative overflow-hidden">
             <Image
               src={collection.coverImage || "/placeholder.svg"}
@@ -536,7 +536,7 @@ export default function ExplorePage() {
 
         {/* Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-4 mb-8 max-w-4xl mx-auto">
             <TabsTrigger value="trending" className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
               <span className="hidden sm:inline">Trending</span>
@@ -560,13 +560,13 @@ export default function ExplorePage() {
 
           {/* Trending Artworks */}
           <TabsContent value="trending" className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between max-w-6xl mx-auto">
               <h2 className="text-2xl font-bold">Trending Artworks</h2>
               <Button variant="ghost" className="text-primary">
                 View All
               </Button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {trendingArtworks.map((artwork) => (
                 <ArtworkCard key={artwork.id} artwork={artwork} />
               ))}
@@ -575,37 +575,39 @@ export default function ExplorePage() {
 
           {/* Featured Collections */}
           <TabsContent value="collections" className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between max-w-6xl mx-auto">
               <h2 className="text-2xl font-bold">Featured Collections</h2>
               <Button variant="ghost" className="text-primary">
                 View All
               </Button>
             </div>
-            <Carousel className="w-full">
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {featuredCollections.map((collection) => (
-                  <CarouselItem
-                    key={collection.id}
-                    className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
-                  >
-                    <CollectionCard collection={collection} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="hidden sm:flex" />
-              <CarouselNext className="hidden sm:flex" />
-            </Carousel>
+            <div className="max-w-6xl mx-auto">
+              <Carousel className="w-full">
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {featuredCollections.map((collection) => (
+                    <CarouselItem
+                      key={collection.id}
+                      className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
+                    >
+                      <CollectionCard collection={collection} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="hidden sm:flex" />
+                <CarouselNext className="hidden sm:flex" />
+              </Carousel>
+            </div>
           </TabsContent>
 
           {/* New Artists */}
           <TabsContent value="artists" className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between max-w-6xl mx-auto">
               <h2 className="text-2xl font-bold">New Artists</h2>
               <Button variant="ghost" className="text-primary">
                 View All
               </Button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {newArtists.map((artist) => (
                 <ArtistCard key={artist.id} artist={artist} />
               ))}
@@ -614,13 +616,13 @@ export default function ExplorePage() {
 
           {/* Popular Tags */}
           <TabsContent value="tags" className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between max-w-6xl mx-auto">
               <h2 className="text-2xl font-bold">Popular Tags</h2>
               <Button variant="ghost" className="text-primary">
                 View All
               </Button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
               <div className="space-y-4">
                 <h3 className="font-semibold text-lg">Trending Tags</h3>
                 <div className="flex flex-wrap gap-2">

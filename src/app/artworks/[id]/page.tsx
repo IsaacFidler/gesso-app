@@ -260,7 +260,7 @@ export default function ArtworkDetailPage() {
         </div>
       </header>
 
-      <main className="container px-4 py-8">
+      <main className="container px-4 py-8 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
