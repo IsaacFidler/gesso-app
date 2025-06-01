@@ -1,103 +1,369 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Heart, Home, Search, BookOpen, User, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+// Mock data for artworks
+const popularArtworks = [
+  {
+    id: 1,
+    title: "Starry Night",
+    artist: "Vincent van Gogh",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 2,
+    title: "The Great Wave",
+    artist: "Katsushika Hokusai",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 3,
+    title: "Girl with a Pearl Earring",
+    artist: "Johannes Vermeer",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 4,
+    title: "The Persistence of Memory",
+    artist: "Salvador Dalí",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 5,
+    title: "American Gothic",
+    artist: "Grant Wood",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 6,
+    title: "The Scream",
+    artist: "Edvard Munch",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 7,
+    title: "Guernica",
+    artist: "Pablo Picasso",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 8,
+    title: "The Birth of Venus",
+    artist: "Sandro Botticelli",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+  {
+    id: 9,
+    title: "Water Lilies",
+    artist: "Claude Monet",
+    image: "/placeholder.svg?height=300&width=300",
+  },
+];
+
+const newAdditions = [
+  {
+    id: 10,
+    title: "Composition VII",
+    artist: "Wassily Kandinsky",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+  {
+    id: 11,
+    title: "The Kiss",
+    artist: "Gustav Klimt",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+  {
+    id: 12,
+    title: "Las Meninas",
+    artist: "Diego Velázquez",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+  {
+    id: 13,
+    title: "The Night Watch",
+    artist: "Rembrandt",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+  {
+    id: 14,
+    title: "A Sunday Afternoon",
+    artist: "Georges Seurat",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+];
+
+const recommendedArtworks = [
+  {
+    id: 15,
+    title: "The Arnolfini Portrait",
+    artist: "Jan van Eyck",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+  {
+    id: 16,
+    title: "Liberty Leading the People",
+    artist: "Eugène Delacroix",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+  {
+    id: 17,
+    title: "The Garden of Earthly Delights",
+    artist: "Hieronymus Bosch",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+  {
+    id: 18,
+    title: "The Creation of Adam",
+    artist: "Michelangelo",
+    image: "/placeholder.svg?height=250&width=250",
+  },
+];
+
+function ArtworkCard({
+  artwork,
+  size = "default",
+}: {
+  artwork: any;
+  size?: "default" | "small";
+}) {
+  const cardClass = size === "small" ? "w-full" : "w-full";
+  const imageHeight = size === "small" ? 200 : 250;
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <Card
+      className={`${cardClass} group cursor-pointer hover:shadow-lg transition-shadow duration-300`}
+    >
+      <CardContent className="p-0">
+        <div className="relative overflow-hidden rounded-t-lg">
+          <Image
+            src={artwork.image || "/placeholder.svg"}
+            alt={artwork.title}
+            width={300}
+            height={imageHeight}
+            className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <Button size="icon" variant="secondary" className="h-8 w-8">
+              <Heart className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
+        <div className="p-4">
+          <h3 className="font-semibold text-sm sm:text-base line-clamp-1 mb-1">
+            {artwork.title}
+          </h3>
+          <p className="text-muted-foreground text-xs sm:text-sm line-clamp-1">
+            {artwork.artist}
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between px-4">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-lg">
+                G
+              </span>
+            </div>
+            <span className="font-bold text-xl">Gesso</span>
+          </div>
+
+          <nav className="hidden md:flex items-center space-x-6">
+            <Link href="/" className="flex items-center space-x-2 text-primary">
+              <Home className="h-4 w-4" />
+              <span>Home</span>
+            </Link>
+            <Link
+              href="/explore"
+              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Search className="h-4 w-4" />
+              <span>Explore</span>
+            </Link>
+            <Link
+              href="/collections"
+              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <BookOpen className="h-4 w-4" />
+              <span>Collections</span>
+            </Link>
+            <Link
+              href="/profile"
+              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <User className="h-4 w-4" />
+              <span>Profile</span>
+            </Link>
+          </nav>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex items-center space-x-4">
+            <Button variant="ghost" size="icon">
+              <Search className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon">
+              <User className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        {/* Hero Section */}
+        <section className="relative py-12 sm:py-20 lg:py-24">
+          <div className="container px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-6">
+                Discover the World's
+                <span className="text-primary block">Greatest Art</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Explore masterpieces from renowned artists, discover new
+                favorites, and build your personal collection of inspiring
+                artworks.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="text-lg px-8">
+                  Explore Art
+                </Button>
+                <Button size="lg" variant="outline" className="text-lg px-8">
+                  View Collections
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Popular Artworks */}
+        <section className="py-12 sm:py-16">
+          <div className="container px-4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold">
+                Popular Artworks
+              </h2>
+              <Button variant="ghost" className="text-primary">
+                View All
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {popularArtworks.map((artwork) => (
+                <ArtworkCard key={artwork.id} artwork={artwork} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* New Additions */}
+        <section className="py-12 sm:py-16 bg-muted/30">
+          <div className="container px-4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold">New Additions</h2>
+              <Button variant="ghost" className="text-primary">
+                View All
+              </Button>
+            </div>
+
+            <Carousel className="w-full">
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {newAdditions.map((artwork) => (
+                  <CarouselItem
+                    key={artwork.id}
+                    className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  >
+                    <ArtworkCard artwork={artwork} size="small" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden sm:flex" />
+              <CarouselNext className="hidden sm:flex" />
+            </Carousel>
+          </div>
+        </section>
+
+        {/* Recommended for You */}
+        <section className="py-12 sm:py-16">
+          <div className="container px-4">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+                  Recommended for You
+                </h2>
+                <p className="text-muted-foreground">
+                  Based on your favorites and viewing history
+                </p>
+              </div>
+              <Button variant="ghost" className="text-primary">
+                View All
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {recommendedArtworks.map((artwork) => (
+                <div key={artwork.id} className="relative">
+                  <ArtworkCard artwork={artwork} size="small" />
+                  <div className="absolute top-2 left-2 bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                    <Star className="h-3 w-3 fill-current" />
+                    Recommended
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background border-t">
+        <div className="flex items-center justify-around py-2">
+          <Link
+            href="/"
+            className="flex flex-col items-center p-2 text-primary"
+          >
+            <Home className="h-5 w-5" />
+            <span className="text-xs mt-1">Home</span>
+          </Link>
+          <Link
+            href="/explore"
+            className="flex flex-col items-center p-2 text-muted-foreground"
+          >
+            <Search className="h-5 w-5" />
+            <span className="text-xs mt-1">Explore</span>
+          </Link>
+          <Link
+            href="/collections"
+            className="flex flex-col items-center p-2 text-muted-foreground"
+          >
+            <BookOpen className="h-5 w-5" />
+            <span className="text-xs mt-1">Collections</span>
+          </Link>
+          <Link
+            href="/profile"
+            className="flex flex-col items-center p-2 text-muted-foreground"
+          >
+            <User className="h-5 w-5" />
+            <span className="text-xs mt-1">Profile</span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
