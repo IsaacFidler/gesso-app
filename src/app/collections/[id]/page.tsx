@@ -217,7 +217,7 @@ function ArtworkCard({ artwork, isOwner }: { artwork: any; isOwner: boolean }) {
       )}
 
       <CardContent className="p-0">
-        <Link href={`/artwork/${artwork.id}`} className="block">
+        <Link href={`/artworks/${artwork.id}`} className="block">
           <div className="relative overflow-hidden">
             <Image
               src={artwork.image || "/placeholder.svg"}

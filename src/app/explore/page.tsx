@@ -415,7 +415,7 @@ export default function ExplorePage() {
         </div>
       </header>
 
-      <main className="container px-4 py-8">
+      <main className="container px-4 py-8 max-w-6xl mx-auto">
         {/* Search Section */}
         <div className="mb-8">
           <div className="max-w-4xl mx-auto">

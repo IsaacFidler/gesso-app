@@ -15,46 +15,61 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
   Home,
   Search,
   BookOpen,
   User,
-  MoreHorizontal,
-  UserPlus,
-  MessageCircle,
-  Share2,
-  MapPin,
-  Calendar,
-  LinkIcon,
+  Edit3,
+  MoreVertical,
   Heart,
-  Users,
-  Star,
-  ArrowLeft,
+  Plus,
+  Settings,
+  Trash2,
   Globe,
   Lock,
+  RefreshCw,
+  Calendar,
+  MapPin,
+  LinkIcon,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { faker } from "@faker-js/faker";
 
-// Mock user data
-const profileUser = {
-  id: "sarah-chen",
-  name: "Sarah Chen",
-  username: "@sarahc_art",
-  bio: "Art curator and digital artist passionate about contemporary art and emerging artists. Exploring the intersection of technology and traditional art forms.",
+// Mock current user data
+const currentUser = {
+  id: "current-user",
+  name: "Alex Rivera",
+  username: "@alex_art",
+  bio: "Digital artist and art collector passionate about contemporary art and emerging artists.",
   avatar: faker.image.urlPicsumPhotos({ width: 120, height: 120 }),
-  coverImage: faker.image.urlPicsumPhotos({ width: 800, height: 200 }),
-  location: "San Francisco, CA",
-  website: "sarahchen.art",
-  joinDate: "March 2023",
-  isVerified: true,
-  isFollowing: false,
+  location: "New York, NY",
+  website: "alexrivera.art",
+  joinDate: "January 2023",
   stats: {
-    followers: 2847,
-    following: 456,
-    artworks: 89,
-    collections: 12,
+    followers: 1234,
+    following: 567,
+    artworks: 45,
+    collections: 8,
   },
 };
 
@@ -67,7 +82,7 @@ const pinnedFavourites = Array.from({ length: 4 }).map(() => ({
   image: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
 }));
 
-// Mock collections
+// Mock user collections
 const userCollections = Array.from({ length: 4 }).map(() => ({
   id: faker.string.uuid(),
   title: faker.lorem.words(2),
@@ -82,36 +97,7 @@ const userCollections = Array.from({ length: 4 }).map(() => ({
   updatedAt: faker.date.recent({ days: 30 }).toLocaleDateString(),
 }));
 
-// Mock recent activity
-const recentActivity = [
-  {
-    id: 1,
-    type: "liked",
-    artwork: { title: "Composition VII", artist: "Wassily Kandinsky" },
-    timestamp: "2 hours ago",
-  },
-  {
-    id: 2,
-    type: "added_to_collection",
-    artwork: { title: "The Kiss", artist: "Gustav Klimt" },
-    collection: "Romantic Art",
-    timestamp: "1 day ago",
-  },
-  {
-    id: 3,
-    type: "followed",
-    user: { name: "Alex Rivera", username: "@alex_art" },
-    timestamp: "3 days ago",
-  },
-  {
-    id: 4,
-    type: "created_collection",
-    collection: "Digital Art Pioneers",
-    timestamp: "1 week ago",
-  },
-];
-
-function ArtworkCard({ artwork }: { artwork: any }) {
+function PinnedArtworkCard({ artwork }: { artwork: any }) {
   return (
     <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden">
       <CardContent className="p-0">
@@ -147,159 +133,154 @@ function ArtworkCard({ artwork }: { artwork: any }) {
 }
 
 function CollectionCard({ collection }: { collection: any }) {
-  return (
-    <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300">
-      <CardContent className="p-6">
-        <Link href={`/collections/${collection.id}`}>
-          <div className="flex items-start gap-4">
-            {/* Preview Images */}
-            <div className="flex -space-x-2">
-              {collection.previewArtworks
-                .slice(0, 3)
-                .map((image: string, index: number) => (
-                  <div
-                    key={index}
-                    className="w-12 h-12 rounded-lg border-2 border-background overflow-hidden bg-muted"
-                  >
-                    <Image
-                      src={image || "/placeholder.svg"}
-                      alt=""
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              {collection.artworkCount > 3 && (
-                <div className="w-12 h-12 rounded-lg border-2 border-background bg-muted flex items-center justify-center text-xs font-medium text-muted-foreground">
-                  +{collection.artworkCount - 3}
-                </div>
-              )}
-            </div>
+  const [, setIsDeleting] = useState(false);
 
-            {/* Collection Info */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="font-semibold text-base line-clamp-1">
-                  {collection.title}
-                </h3>
-                <Badge variant="secondary" className="text-xs">
+  const handleDelete = () => {
+    setIsDeleting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsDeleting(false);
+      // Remove collection from list
+    }, 1000);
+  };
+
+  return (
+    <Card className="group hover:shadow-lg transition-all duration-300">
+      <CardContent className="p-6">
+        <div className="flex items-start gap-4">
+          {/* Preview Images */}
+          <div className="flex -space-x-2">
+            {collection.previewArtworks
+              .slice(0, 3)
+              .map((image: string, index: number) => (
+                <div
+                  key={index}
+                  className="w-12 h-12 rounded-lg border-2 border-background overflow-hidden bg-muted"
+                >
+                  <Image
+                    src={image || "/placeholder.svg"}
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            {collection.artworkCount > 3 && (
+              <div className="w-12 h-12 rounded-lg border-2 border-background bg-muted flex items-center justify-center text-xs font-medium text-muted-foreground">
+                +{collection.artworkCount - 3}
+              </div>
+            )}
+          </div>
+
+          {/* Collection Info */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Link href={`/collections/${collection.id}`}>
+                  <h3 className="font-semibold text-base line-clamp-1 hover:text-primary transition-colors">
+                    {collection.title}
+                  </h3>
+                </Link>
+                <Badge
+                  variant={
+                    collection.visibility === "Public" ? "default" : "secondary"
+                  }
+                  className="text-xs flex items-center gap-1"
+                >
                   {collection.visibility === "Public" ? (
-                    <Globe className="h-3 w-3 mr-1" />
+                    <Globe className="h-3 w-3" />
                   ) : (
-                    <Lock className="h-3 w-3 mr-1" />
+                    <Lock className="h-3 w-3" />
                   )}
                   {collection.visibility}
                 </Badge>
               </div>
-              <p className="text-muted-foreground text-sm line-clamp-2 mb-2">
-                {collection.description}
-              </p>
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <span>{collection.artworkCount} artworks</span>
-                <span>Updated {collection.updatedAt}</span>
-              </div>
+
+              {/* Action Menu */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <MoreVertical className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link href={`/collections/${collection.id}/edit`}>
+                      <Edit3 className="h-4 w-4 mr-2" />
+                      Edit Collection
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Settings className="h-4 w-4 mr-2" />
+                    Collection Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <DropdownMenuItem
+                        onSelect={(e) => e.preventDefault()}
+                        className="text-destructive"
+                      >
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete Collection
+                      </DropdownMenuItem>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Delete collection?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This will permanently delete &quot;
+                          {collection.title}&quot; and remove all artworks from
+                          this collection. This action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={handleDelete}
+                          className="bg-destructive text-destructive-foreground"
+                        >
+                          Delete Collection
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            <p className="text-muted-foreground text-sm line-clamp-2 mb-2">
+              {collection.description}
+            </p>
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>{collection.artworkCount} artworks</span>
+              <span>Updated {collection.updatedAt}</span>
             </div>
           </div>
-        </Link>
+        </div>
       </CardContent>
     </Card>
   );
 }
 
-function ActivityItem({ activity }: { activity: any }) {
-  const getActivityText = () => {
-    switch (activity.type) {
-      case "liked":
-        return (
-          <>
-            <Heart className="h-4 w-4 text-red-500 mr-2" />
-            Liked{" "}
-            <span className="font-medium">
-              &quot;{activity.artwork.title}&quot;
-            </span>{" "}
-            by {activity.artwork.artist}
-          </>
-        );
-      case "added_to_collection":
-        return (
-          <>
-            <BookOpen className="h-4 w-4 text-blue-500 mr-2" />
-            Added{" "}
-            <span className="font-medium">
-              &quot;{activity.artwork.title}&quot;
-            </span>{" "}
-            to <span className="font-medium">{activity.collection}</span>
-          </>
-        );
-      case "followed":
-        return (
-          <>
-            <UserPlus className="h-4 w-4 text-green-500 mr-2" />
-            Started following{" "}
-            <span className="font-medium">{activity.user.name}</span> (
-            {activity.user.username})
-          </>
-        );
-      case "created_collection":
-        return (
-          <>
-            <Star className="h-4 w-4 text-yellow-500 mr-2" />
-            Created collection{" "}
-            <span className="font-medium">
-              &quot;{activity.collection}&quot;
-            </span>
-          </>
-        );
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <div className="flex items-start gap-3 p-4 hover:bg-muted/50 rounded-lg transition-colors">
-      <div className="flex items-center text-sm text-muted-foreground flex-1">
-        {getActivityText()}
-      </div>
-      <span className="text-xs text-muted-foreground whitespace-nowrap">
-        {activity.timestamp}
-      </span>
-    </div>
-  );
-}
-
-export default function ProfilePage() {
-  const [isFollowing, setIsFollowing] = useState(profileUser.isFollowing);
-  const [followerCount, setFollowerCount] = useState(
-    profileUser.stats.followers
-  );
-
-  const handleFollow = () => {
-    setIsFollowing(!isFollowing);
-    setFollowerCount(isFollowing ? followerCount - 1 : followerCount + 1);
-  };
-
+export default function MyProfilePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between px-4">
-          <div className="flex items-center space-x-4">
-            <Link
-              href="/"
-              className="flex items-center space-x-2 text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Back</span>
-            </Link>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">
-                  G
-                </span>
-              </div>
-              <span className="font-bold text-xl">Gesso</span>
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-lg">
+                G
+              </span>
             </div>
+            <span className="font-bold text-xl">Gesso</span>
           </div>
 
           <nav className="hidden md:flex items-center space-x-6">
@@ -333,27 +314,10 @@ export default function ProfilePage() {
             </Link>
           </nav>
 
-          <div className="flex items-center space-x-2">
+          <div className="md:hidden">
             <Button variant="ghost" size="icon">
-              <Share2 className="h-4 w-4" />
+              <User className="h-5 w-5" />
             </Button>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share Profile
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-destructive">
-                  Report User
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
         </div>
       </header>
@@ -366,95 +330,82 @@ export default function ProfilePage() {
             <div className="relative">
               <Avatar className="h-24 w-24 sm:h-32 sm:w-32">
                 <AvatarImage
-                  src={profileUser.avatar || "/placeholder.svg"}
-                  alt={profileUser.name}
+                  src={currentUser.avatar || "/placeholder.svg"}
+                  alt={currentUser.name}
                 />
                 <AvatarFallback className="text-2xl">
-                  {profileUser.name
+                  {currentUser.name
                     .split(" ")
                     .map((n) => n[0])
                     .join("")}
                 </AvatarFallback>
               </Avatar>
-              {profileUser.isVerified && (
-                <div className="absolute -bottom-1 -right-1 bg-blue-500 text-white rounded-full p-1">
-                  <Star className="h-3 w-3 fill-current" />
-                </div>
-              )}
             </div>
 
             {/* User Info */}
             <div className="flex-1 min-w-0">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-bold mb-1">
-                    {profileUser.name}
-                  </h1>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h1 className="text-2xl sm:text-3xl font-bold">
+                      {currentUser.name}
+                    </h1>
+                    <Button variant="outline" size="sm">
+                      <Edit3 className="h-4 w-4 mr-2" />
+                      Edit Profile
+                    </Button>
+                  </div>
                   <p className="text-muted-foreground mb-2">
-                    {profileUser.username}
+                    {currentUser.username}
                   </p>
                   <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
-                    {profileUser.location && (
+                    {currentUser.location && (
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4" />
-                        <span>{profileUser.location}</span>
+                        <span>{currentUser.location}</span>
                       </div>
                     )}
-                    {profileUser.website && (
+                    {currentUser.website && (
                       <div className="flex items-center gap-1">
                         <LinkIcon className="h-4 w-4" />
                         <Link
-                          href={`https://${profileUser.website}`}
+                          href={`https://${currentUser.website}`}
                           className="hover:text-primary transition-colors"
                         >
-                          {profileUser.website}
+                          {currentUser.website}
                         </Link>
                       </div>
                     )}
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
-                      <span>Joined {profileUser.joinDate}</span>
+                      <span>Joined {currentUser.joinDate}</span>
                     </div>
                   </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex items-center gap-2">
-                  <Button
-                    onClick={handleFollow}
-                    className="flex items-center gap-2"
-                  >
-                    <UserPlus className="h-4 w-4" />
-                    {isFollowing ? "Following" : "Follow"}
-                  </Button>
-                  <Button variant="outline" size="icon">
-                    <MessageCircle className="h-4 w-4" />
-                  </Button>
                 </div>
               </div>
 
               {/* Bio */}
               <p className="text-muted-foreground leading-relaxed mb-4 max-w-2xl">
-                {profileUser.bio}
+                {currentUser.bio}
               </p>
 
               {/* Stats */}
               <div className="flex items-center gap-6 text-sm">
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">
-                    {followerCount.toLocaleString()}
+                    {currentUser.stats.followers.toLocaleString()}
                   </span>
                   <span className="text-muted-foreground">followers</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">
-                    {profileUser.stats.following.toLocaleString()}
+                    {currentUser.stats.following.toLocaleString()}
                   </span>
                   <span className="text-muted-foreground">following</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="font-semibold">
-                    {profileUser.stats.collections}
+                    {currentUser.stats.collections}
                   </span>
                   <span className="text-muted-foreground">collections</span>
                 </div>
@@ -472,25 +423,49 @@ export default function ProfilePage() {
               <Heart className="h-6 w-6 text-red-500" />
               Pinned Favourites
             </h2>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  Change
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle>Change Pinned Favourites</DialogTitle>
+                  <DialogDescription>
+                    Select up to 4 artworks to pin to your profile. These will
+                    be prominently displayed to visitors.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="py-4">
+                  <p className="text-sm text-muted-foreground">
+                    This would show a grid of your favorited artworks to choose
+                    from...
+                  </p>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {pinnedFavourites.map((artwork) => (
-              <ArtworkCard key={artwork.id} artwork={artwork} />
+              <PinnedArtworkCard key={artwork.id} artwork={artwork} />
             ))}
           </div>
         </section>
 
         <Separator className="mb-8" />
 
-        {/* Collections */}
-        <section className="mb-12">
+        {/* My Collections */}
+        <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold flex items-center gap-2">
               <BookOpen className="h-6 w-6" />
-              Collections ({userCollections.length})
+              My Collections ({userCollections.length})
             </h2>
-            <Button variant="ghost" className="text-primary">
-              View All
+            <Button className="flex items-center gap-2">
+              <Plus className="h-4 w-4" />
+              Create New Collection
             </Button>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -498,28 +473,6 @@ export default function ProfilePage() {
               <CollectionCard key={collection.id} collection={collection} />
             ))}
           </div>
-        </section>
-
-        <Separator className="mb-8" />
-
-        {/* Recent Activity */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold flex items-center gap-2">
-              <Users className="h-6 w-6" />
-              Recent Activity
-            </h2>
-          </div>
-          <Card>
-            <CardContent className="p-0">
-              {recentActivity.map((activity, index) => (
-                <div key={activity.id}>
-                  <ActivityItem activity={activity} />
-                  {index < recentActivity.length - 1 && <Separator />}
-                </div>
-              ))}
-            </CardContent>
-          </Card>
         </section>
       </main>
 
