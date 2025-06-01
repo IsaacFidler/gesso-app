@@ -133,6 +133,7 @@ function ArtworkCard({
   artwork,
   size = "default",
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   artwork: any;
   size?: "default" | "small";
 }) {
@@ -232,7 +233,7 @@ export default function HomePage() {
           <div className="container px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-6">
-                Discover the World's
+                Discover the World&apos;s
                 <span className="text-primary block">Greatest Art</span>
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -266,7 +267,14 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {popularArtworks.map((artwork) => (
-                <ArtworkCard key={artwork.id} artwork={artwork} />
+                <Link
+                  key={artwork.id}
+                  href={`/artworks/${artwork.id}`}
+                  className="block"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <ArtworkCard artwork={artwork} />
+                </Link>
               ))}
             </div>
           </div>
@@ -289,7 +297,13 @@ export default function HomePage() {
                     key={artwork.id}
                     className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                   >
-                    <ArtworkCard artwork={artwork} size="small" />
+                    <Link
+                      href={`/artworks/${artwork.id}`}
+                      className="block"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <ArtworkCard artwork={artwork} size="small" />
+                    </Link>
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -318,13 +332,18 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {recommendedArtworks.map((artwork) => (
-                <div key={artwork.id} className="relative">
+                <Link
+                  key={artwork.id}
+                  href={`/artworks/${artwork.id}`}
+                  className="relative block"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
                   <ArtworkCard artwork={artwork} size="small" />
                   <div className="absolute top-2 left-2 bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
                     <Star className="h-3 w-3 fill-current" />
                     Recommended
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
