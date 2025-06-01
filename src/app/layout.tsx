@@ -34,7 +34,7 @@ export default function RootLayout({
             <Link href="/">
               <span className="flex items-center gap-2">
                 <Image
-                  src="/GessoLogo.png"
+                  src="/Gesso.png"
                   alt="Gesso Logo"
                   width={32}
                   height={32}
